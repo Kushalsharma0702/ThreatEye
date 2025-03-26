@@ -1,5 +1,4 @@
-# CyberSentinel
-
+# ThreatEye
 ## Overview
 CyberSentinel is an automated cybersecurity tool designed to detect and analyze vulnerabilities in an organization's system. It collects real-time attack data, compares it with known vulnerabilities, and scans systems for potential security risks. The project aims to help businesses identify and mitigate threats before they lead to security breaches.
 

@@ -1,6 +1,7 @@
 # ThreatEye
+
 ## Overview
-CyberSentinel is an automated cybersecurity tool designed to detect and analyze vulnerabilities in an organization's system. It collects real-time attack data, compares it with known vulnerabilities, and scans systems for potential security risks. The project aims to help businesses identify and mitigate threats before they lead to security breaches.
+ThreatEye is an automated cybersecurity tool designed to detect and analyze vulnerabilities in an organization's system. It collects real-time attack data, compares it with known vulnerabilities, and scans systems for potential security risks. The project aims to help businesses identify and mitigate threats before they lead to security breaches.
 
 ## Features
 - **Real-Time Attack Data Collection**: Fetches data from APIs like CVE, MITRE ATT&CK, and Shodan.
@@ -19,8 +20,8 @@ Ensure you have the following installed:
 ### Setup
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/cybersentinel.git
-   cd cybersentinel
+   git clone https://github.com/Kushalsharma0702/ThreatEye.git
+   cd threateye
    ```
 2. Install dependencies:
    ```sh

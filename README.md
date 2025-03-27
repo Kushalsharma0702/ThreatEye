@@ -18,7 +18,7 @@ Ensure you have the following installed:
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/yourusername/ThreatEye.git
+git clone https://github.com/kushalsharma0702/ThreatEye.git
 cd ThreatEye/Backend
 ```
 

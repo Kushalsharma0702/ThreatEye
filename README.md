@@ -1,80 +1,124 @@
 # ThreatEye
 
-## Overview
-ThreatEye is an automated cybersecurity tool designed to detect and analyze vulnerabilities in an organization's system. It collects real-time attack data, compares it with known vulnerabilities, and scans systems for potential security risks. The project aims to help businesses identify and mitigate threats before they lead to security breaches.
+ThreatEye is a cybersecurity tool that scans a system for vulnerabilities, provides historical incident data related to those vulnerabilities, and assists users in mitigating security threats. It also integrates with the Shodan API to cross-check findings with publicly available security data.
 
 ## Features
-- **Real-Time Attack Data Collection**: Fetches data from APIs like CVE, MITRE ATT&CK, and Shodan.
-- **Vulnerability Analysis**: Extracts key details and matches attacks with known CVEs.
-- **System Scanning**: Uses tools like Nmap, OWASP Dependency-Check, and Nikto to analyze company systems.
-- **Reporting & Alerts**: Generates reports in JSON, PDF, and CSV formats, with optional email/Slack alerts.
-- **Web Dashboard (Optional)**: Provides an interactive UI using React and Tailwind CSS.
+- Scan a system for known vulnerabilities
+- Retrieve historical incidents linked to detected vulnerabilities
+- Provide potential impact and financial loss details from past security incidents
+- Integrate with the Shodan API for real-world vulnerability verification
+- Expose a REST API with FastAPI for easy integration
 
 ## Installation
 ### Prerequisites
 Ensure you have the following installed:
-- Python 3.x
-- PostgreSQL/MongoDB (or SQLite for small-scale testing)
-- Required Python libraries (listed in `requirements.txt`)
+- Python 3.10+
+- pip (Python package manager)
+- Virtual environment (optional but recommended)
 
-### Setup
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/Kushalsharma0702/ThreatEye.git
-   cd threateye
-   ```
-2. Install dependencies:
-   ```sh
-   pip install -r requirements.txt
-   ```
-3. Set up the database:
-   ```sh
-   python setup_db.py
-   ```
-4. Run the system scanner:
-   ```sh
-   python scanner.py
-   ```
-5. (Optional) Start the web dashboard:
-   ```sh
-   cd frontend
-   npm install
-   npm start
-   ```
+### Clone the Repository
+```bash
+git clone https://github.com/yourusername/ThreatEye.git
+cd ThreatEye/Backend
+```
 
-## Usage
-1. Run the attack data fetcher:
-   ```sh
-   python fetch_attack_data.py
-   ```
-2. Analyze the vulnerabilities:
-   ```sh
-   python analyze_vulnerabilities.py
-   ```
-3. Scan a system for potential threats:
-   ```sh
-   python system_scanner.py --target your-domain.com
-   ```
-4. Generate a security report:
-   ```sh
-   python generate_report.py --format pdf
-   ```
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-## Technologies Used
-- **Backend:** Python (Flask/Django)
-- **Database:** PostgreSQL/MongoDB/SQLite
-- **Security Tools:** Nmap, OWASP Dependency-Check, Nikto
-- **Frontend (Optional):** React, Tailwind CSS
-- **Reporting:** ReportLab (PDF), Pandas (CSV)
+## Configuration
+### Set Up Environment Variables
+Create a `.env` file in the `Backend` directory and add the following:
+```env
+SHODAN_API_KEY=your_shodan_api_key
+```
 
-## Future Enhancements
-- AI-driven threat prediction
-- Integration with more security APIs
-- Real-time monitoring dashboard
+## Running the Application
+### Start the Backend Server
+Run the FastAPI server using Uvicorn:
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
 
-## Contributors
-- **Kushal Sharma** (Project Lead)
-- Open for contributions! Feel free to submit PRs or raise issues.
+Once started, visit Swagger UI for API documentation:
+- Open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) in your browser.
+
+## API Endpoints
+### 1. User Registration
+**Endpoint:** `/auth/register`
+- **Method:** `POST`
+- **Payload:**
+  ```json
+  {
+    "username": "testuser",
+    "password": "testpass"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "message": "User registered successfully"
+  }
+  ```
+
+### 2. Start System Scan
+**Endpoint:** `/scan/start?username={username}`
+- **Method:** `POST`
+- **Response:**
+  ```json
+  {
+    "username": "kush",
+    "status": "Scan completed",
+    "vulnerabilities": [
+      "CVE-2023-1234",
+      "CVE-2024-5678"
+    ],
+    "incident_history": [
+      {
+        "CVE": "CVE-2023-1234",
+        "impact": "Data breach",
+        "loss": "$500K"
+      },
+      {
+        "CVE": "CVE-2024-5678",
+        "impact": "Ransomware attack",
+        "loss": "$1M"
+      }
+    ]
+  }
+  ```
+
+### 3. Verify Vulnerabilities with Shodan
+**Script:** `shodan_checker.py`
+- **Usage:**
+  ```bash
+  python shodan_checker.py <PUBLIC_IP>
+  ```
+- **Example Output:**
+  ```bash
+  [+] Searching Shodan for 8.8.8.8...
+  --- Device Information ---
+  IP: 8.8.8.8
+  Organization: Google LLC
+  Operating System: None
+  --- Open Ports ---
+  Port: 443
+  Port: 53
+  --- Vulnerabilities (CVEs) ---
+  ```
+
+## Troubleshooting
+### API Not Working?
+- Ensure your FastAPI server is running (`uvicorn main:app --host 0.0.0.0 --port 8000 --reload`).
+- Check Swagger UI at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+- If Shodan script fails:
+  - Ensure `SHODAN_API_KEY` is correctly set.
+  - Test with a known public IP like `8.8.8.8`.
 
 ## License
-This project is licensed under the MIT License. See `LICENSE` for details.
+MIT License
+
+## Contact
+For issues or contributions, open a GitHub issue or reach out at `your-email@example.com`.
+

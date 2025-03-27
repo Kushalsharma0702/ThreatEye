@@ -120,5 +120,5 @@ Once started, visit Swagger UI for API documentation:
 MIT License
 
 ## Contact
-For issues or contributions, open a GitHub issue or reach out at `your-email@example.com`.
+For issues or contributions, open a GitHub issue or reach out at `sharmakushal7417@gmail.com`.
 
